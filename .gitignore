@@ -3,3 +3,5 @@
 ~*.pptx
 .DS_Store
 */__py_cache__/*
+/edu_platform/.idea
+/edu_platform/.venv
