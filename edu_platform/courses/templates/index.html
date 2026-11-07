@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+
+    {% if profile.status == 'active' %}
+        <p>Активний статус</p>
+    {% else %}
+        <p>Інший статус</p>
+    {% endif %}
+
+    <ul>
+    {% for course in courses %}
+        <li>{{ course }}</li>
+    {% endfor %}
+    </ul>
+
+    {% autoescape off %}
+        <p>Name: {{ name }}</p>
+        <p>Group: {{ profile.group }}</p>
+    {% endautoescape %}
+</body>
+</html>
