@@ -15,7 +15,9 @@
 
     <ul>
     {% for course in courses %}
-        <li>{{ course }}</li>
+        <li class="row {% cycle 'odd' 'even' %}">{{ forloop.counter0 }}. {{ course }}. First: {{ forloop.last }}</li>
+    {% empty %}
+        <p>Немає Курсів</p>
     {% endfor %}
     </ul>
 

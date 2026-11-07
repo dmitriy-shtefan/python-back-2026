@@ -12,7 +12,7 @@ def index(request):
     context = {
         "name": "Kyrylo",
         "profile": {"group": "<b>P42</b>", "status": "active"},
-        "courses": ["Python", "C#", "JavaScript", "Java"],
+        "courses": [], # ["Python", "C#", "JavaScript", "Java"],
     }
 
     return render(request, "index.html", context)
