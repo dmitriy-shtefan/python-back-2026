@@ -1,0 +1,37 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<h1>{{ t.site }}</h1>
+<p>{{ t.welcome }}</p>
+
+<h2>{{ t.menu }}</h2>
+<ul>
+  <li><a href="#about">{{ t.about }}</a></li>
+  <li><a href="#games">{{ t.games }}</a></li>
+  <li><a href="#advantages">{{ t.advantages }}</a></li>
+  <li><a href="#contacts">{{ t.contacts }}</a></li>
+</ul>
+
+<section id="about">
+  <h2>{{ t.about }}</h2>
+  <p>{{ t.about_text }}</p>
+</section>
+
+<section id="games">
+  <h2>{{ t.games }}</h2>
+  <ul>
+    {% for game in games %}<li><a href="{{ lp }}/games/{{ game.id }}/">{{ game.title }}</a></li>{% endfor %}
+  </ul>
+</section>
+
+<section id="advantages">
+  <h2>{{ t.advantages }}</h2>
+  <ul>
+    {% for item in t.advantages_list %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section id="contacts">
+  <h2>{{ t.contacts }}</h2>
+  <p>{{ t.contacts_text }}</p>
+</section>
+{% endblock %}

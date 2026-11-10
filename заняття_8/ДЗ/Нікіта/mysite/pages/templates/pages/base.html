@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ t.html_lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ t.site }}</title>
+</head>
+<body>
+<nav>
+  <a href="{{ lp }}/">{{ t.nav_home }}</a>
+  <a href="{{ lp }}/about/">{{ t.nav_about }}</a>
+  <a href="{{ lp }}/contacts/">{{ t.nav_contacts }}</a>
+  {% for name in t.game_names %}<a href="{{ lp }}/games/{{ forloop.counter }}/">{{ name }}</a>
+  {% endfor %}<a href="{{ lp }}/context/">{{ t.nav_context }}</a>
+  <a href="{{ lp }}/profile/">{{ t.nav_profile }}</a>
+</nav>
+<p>{{ t.language }}:
+  {% for l in languages %}{% if l.code == lang %}<strong>{{ l.label }}</strong>{% else %}<a href="{{ l.url }}">{{ l.label }}</a>{% endif %}{% if not forloop.last %} | {% endif %}{% endfor %}
+</p>
+<hr>
+<main>
+{% block content %}{% endblock %}
+</main>
+<hr>
+<footer>{{ t.footer }}</footer>
+</body>
+</html>

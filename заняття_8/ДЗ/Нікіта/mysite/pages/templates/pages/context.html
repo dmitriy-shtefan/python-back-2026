@@ -1,0 +1,9 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p>{{ t.ctx_count }}: {{ count }}</p>
+<p>{{ t.ctx_hello }}, {% if user.is_authenticated %}{{ user.username }}{% else %}{{ t.ctx_guest }}{% endif %}!</p>
+<ul>
+  {% for game in games %}<li>{{ game.title }}</li>{% empty %}<li>{{ t.ctx_empty }}</li>{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p>{{ text }}</p>
+{% if cta %}<p><a href="{{ cta_url }}">{{ cta }}</a></p>{% endif %}
+{% endblock %}
