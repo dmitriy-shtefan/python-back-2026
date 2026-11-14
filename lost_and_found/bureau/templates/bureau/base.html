@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Бюро знахідок{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'app.css' %}">
+  <script src="{% static 'app.js' %}" defer></script>
+</head>
+<body>
+  <header>
+    <p>Бюро знахідок</p>
+    <nav>
+      <a href="{% url 'home' %}">Головна</a>
+      <a href="{% url 'found' %}">Знахідки</a>
+      <a href="{% url 'pickup' %}">Як забрати річ</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>Бюро знахідок навчального закладу</p>
+  </footer>
+</body>
+</html>

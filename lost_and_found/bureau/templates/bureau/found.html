@@ -1,156 +1,23 @@
-<!doctype html>
-<html lang="uk">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Знахідки</title>
-  <style>
-    body {
-      max-width: 68rem;
-      margin: 0 auto;
-      padding: 0 1rem;
-      background: #eef6f4;
-      color: #153630;
-      font: 1rem/1.6 system-ui, sans-serif;
-    }
+{% extends "bureau/base.html" %}
 
-    header, nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: .5rem 1rem;
-    }
+{% block title %}Знахідки{% endblock %}
 
-    header {
-      justify-content: space-between;
-      padding: 1rem 0;
-    }
-
-    header p { margin: 0; font-weight: 800; }
-    a { color: #075e53; text-underline-offset: .2em; }
-    nav a { font-weight: 600; }
-
-    main {
-      padding: clamp(1.25rem, 5vw, 3.5rem);
-      border: 1px solid #d3e5df;
-      border-radius: 1.5rem;
-      background: linear-gradient(145deg, #fff 55%, #ddf2ea);
-      box-shadow: 0 .75rem 2rem #1536300d;
-    }
-
-    h1 {
-      max-width: 22ch;
-      margin: .25rem 0 .75rem;
-      font-size: clamp(1.75rem, 5vw, 3.25rem);
-      line-height: 1.1;
-      letter-spacing: -.035em;
-    }
-
-    .eyebrow {
-      margin: 0;
-      color: #075e53;
-      font-size: .8rem;
-      font-weight: 750;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .button {
-      display: inline-block;
-      padding: .6rem 1rem;
-      border-radius: .65rem;
-      background: #075e53;
-      color: #fff;
-      font-weight: 650;
-      text-decoration: none;
-    }
-
-    .button:hover { background: #05463e; }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
-      gap: .75rem;
-      padding: 0;
-      list-style: none;
-    }
-
-    .cards li {
-      padding: 1rem;
-      border: 1px solid #d3e5df;
-      border-radius: .85rem;
-      background: #fff;
-    }
-
-    .cards h2 { margin: 0 0 .4rem; font-size: 1.1rem; }
-    .cards p { margin: .2rem 0; }
-
-    label { display: block; font-weight: 650; }
-
-    input[type="search"] {
-      box-sizing: border-box;
-      width: min(100%, 28rem);
-      padding: .65rem .85rem;
-      border: 1px solid #759b91;
-      border-radius: .65rem;
-      background: #fff;
-      color: inherit;
-      font: inherit;
-    }
-
-    :focus-visible { outline: 2px solid #075e53; outline-offset: 3px; }
-    footer { color: #496660; font-size: .9rem; }
-  </style>
-</head>
-<body>
-  <header>
-    <p>Бюро знахідок</p>
-    <nav>
-      <a href="{% url 'home' %}">Головна</a>
-      <a href="{% url 'found' %}">Знахідки</a>
-      <a href="{% url 'pickup' %}">Як забрати річ</a>
-    </nav>
-  </header>
-  <main>
-    <p class="eyebrow">Каталог бюро</p>
-    <h1>Знайдені речі</h1>
-    <div id="search-panel" hidden>
-      <label for="search">Пошук за назвою або місцем</label>
-      <input id="search" type="search" placeholder="Наприклад, парасолька">
-      <p id="search-status" role="status"></p>
-    </div>
-    <ul class="cards">
-      {% for item in items %}
-        <li data-search="{{ item.name }} {{ item.place }}">
-          <h2>{{ item.name }}</h2>
-          <p>Де знайшли: {{ item.place }}</p>
-          <p>Коли знайшли: {{ item.date }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-    <p>Упізнали свою річ? <a href="{% url 'pickup' %}">Дізнайтеся, як її забрати</a>.</p>
-  </main>
-  <footer>
-    <p>Бюро знахідок навчального закладу</p>
-  </footer>
-  <script>
-    const search = document.querySelector("#search");
-    const searchStatus = document.querySelector("#search-status");
-    const cards = document.querySelectorAll(".cards li");
-
-    search.addEventListener("input", () => {
-      const query = search.value.trim().toLowerCase();
-      let matches = 0;
-
-      for (const card of cards) {
-        card.hidden = !card.dataset.search.toLowerCase().includes(query);
-        if (!card.hidden) matches += 1;
-      }
-
-      searchStatus.textContent = matches ? `Збігів: ${matches}` : "Нічого не знайдено.";
-    });
-
-    document.querySelector("#search-panel").hidden = false;
-  </script>
-</body>
-</html>
+{% block content %}
+<p class="eyebrow">Каталог бюро</p>
+<h1>Знайдені речі</h1>
+<div id="search-panel" hidden>
+  <label for="search">Пошук за назвою або місцем</label>
+  <input id="search" type="search" placeholder="Наприклад, парасолька">
+  <p id="search-status" role="status"></p>
+</div>
+<ul class="cards">
+  {% for item in items %}
+    <li data-search="{{ item.name }} {{ item.place }}">
+      <h2>{{ item.name }}</h2>
+      <p>Де знайшли: {{ item.place }}</p>
+      <p>Коли знайшли: {{ item.date }}</p>
+    </li>
+  {% endfor %}
+</ul>
+<p>Упізнали свою річ? <a href="{% url 'pickup' %}">Дізнайтеся, як її забрати</a>.</p>
+{% endblock %}
