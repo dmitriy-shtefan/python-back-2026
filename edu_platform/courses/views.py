@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime
+from .models import Course
 
 LESSONS = {
     1: "HTTP",
@@ -32,8 +33,10 @@ def profile(request):
 
 
 
-def course_list(request):
-    return render(request, "course_list.html")
+def courses_list(request):
+    courses = Course.objects.all()
+
+    return render(request, "course_list.html", {"courses": courses})
 
 
 def contacts(request):

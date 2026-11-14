@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+    <ul>
+    {% for course in courses %}
+        <li>
+            Title: {{ course.title }}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
