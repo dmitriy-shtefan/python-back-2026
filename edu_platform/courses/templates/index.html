@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Courses</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
     <h1>Hello World!</h1>
 
     {% if profile.status == 'active' %}
@@ -15,7 +13,7 @@
 
     <ul>
     {% for course in courses %}
-        <li class="row {% cycle 'odd' 'even' %}">{{ forloop.counter0 }}. {{ course }}. First: {{ forloop.last }}</li>
+        <li class="row {% cycle 'odd' 'even' %}">{{ forloop.counter }}. {{ course.title }}. First: {{ forloop.last }}</li>
     {% empty %}
         <p>Немає Курсів</p>
     {% endfor %}
@@ -25,5 +23,4 @@
         <p>Name: {{ name }}</p>
         <p>Group: {{ profile.group }}</p>
     {% endautoescape %}
-</body>
-</html>
+{% endblock %}

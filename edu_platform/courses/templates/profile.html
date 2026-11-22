@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
     <h2>{{ username|title }}</h2>
     <p>Баланс: {{ balance|floatformat:2 }}</p>
     <p>Дата: {{ joined|date:"d.m.Y" }}</p>
@@ -15,5 +13,4 @@
     {% comment %}
         django template comments
     {% endcomment %}
-</body>
-</html>
+{% endblock %}

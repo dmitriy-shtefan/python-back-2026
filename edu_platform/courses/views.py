@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from .models import Course
 
@@ -10,10 +10,11 @@ LESSONS = {
 }
 
 def index(request):
+    courses = Course.objects.filter(is_active=True)
     context = {
         "name": "Kyrylo",
         "profile": {"group": "<b>P42</b>", "status": "active"},
-        "courses": [], # ["Python", "C#", "JavaScript", "Java"],
+        "courses": courses,
     }
 
     return render(request, "index.html", context)
@@ -37,6 +38,12 @@ def courses_list(request):
     courses = Course.objects.all()
 
     return render(request, "course_list.html", {"courses": courses})
+
+
+def course_details(request, pk):
+    course = get_object_or_404(Course, id=pk)
+
+    return render(request, "course_details.html", {"course": course})
 
 
 def contacts(request):
