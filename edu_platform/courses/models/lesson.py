@@ -5,7 +5,7 @@ class Lesson(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True)
 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
 
     updated_at = models.DateTimeField(auto_now=True)   # оновлення дати та часу при кожній зміні курсу
     created_at = models.DateTimeField(auto_now_add=True)   # при створенні курсу зберегти дату та час

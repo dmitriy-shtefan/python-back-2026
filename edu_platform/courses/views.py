@@ -3,11 +3,18 @@ from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from .models import Course
 
+from django.views.generic import TemplateView
+
 LESSONS = {
     1: "HTTP",
     2: "Routing",
     3: "Views",
 }
+
+
+class AboutView(TemplateView):
+    template_name = "about.html"
+
 
 def index(request):
     courses = Course.objects.filter(is_active=True)
@@ -42,6 +49,7 @@ def courses_list(request):
 
 def course_details(request, pk):
     course = get_object_or_404(Course, id=pk)
+    print(course.lessons)
 
     return render(request, "course_details.html", {"course": course})
 
