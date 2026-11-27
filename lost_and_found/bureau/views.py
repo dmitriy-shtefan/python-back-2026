@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
+
+from .forms import LostItemForm
 
 
 def home(request):
@@ -28,3 +31,13 @@ def found(request):
 
 def pickup(request):
     return render(request, "bureau/pickup.html")
+
+
+def report_lost(request):
+    form = LostItemForm()
+    if request.method == "POST" and form.is_valid():
+        form.save(commit=False)
+        messages.success(request, "Повідомлення про загублену річ збережено.")
+        return redirect("report_lost")
+
+    return render(request, "bureau/report_lost.html", {"form": form})

@@ -11,4 +11,5 @@ urlpatterns = [
     path("lessons/<int:lesson_id>/", views.lesson_detail, name="lesson_detail"),
     path("100/", views.course_100, name="course_100"),
     path("old-contacts/", views.old_contacts, name="old_contacts"),
+    path("ask_teacher/", views.ask_teacher, name="ask_teacher"),
 ]

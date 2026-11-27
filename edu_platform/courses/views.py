@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from datetime import datetime
+
+from .forms import TeacherQuestionForm
 from .models import Course
 
 from django.views.generic import TemplateView
@@ -74,3 +76,16 @@ def course_100(request):
 
 def old_contacts(request):
     return HttpResponseRedirect("/contacts/")
+
+
+def ask_teacher(request):
+    if request.method == "POST":
+        form = TeacherQuestionForm(request.POST)
+        if form.is_valid():
+            return render(request, "question_sent.html", {"data": form.cleaned_data})
+        else:
+            form = TeacherQuestionForm(request.POST)
+    else:
+        form = TeacherQuestionForm()
+
+    return render(request, "ask_teacher.html", {"form": form})
